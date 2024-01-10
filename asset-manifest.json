@@ -1,13 +1,25 @@
 {
   "files": {
-    "main.css": "/react-homework-template/static/css/main.7acaea2f.css",
-    "main.js": "/react-homework-template/static/js/main.07d3183d.js",
-    "index.html": "/react-homework-template/index.html",
-    "main.7acaea2f.css.map": "/react-homework-template/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/react-homework-template/static/js/main.07d3183d.js.map"
+    "main.css": "/react-hw-05-movies/static/css/main.f4509734.css",
+    "main.js": "/react-hw-05-movies/static/js/main.e6199c58.js",
+    "static/js/845.beb791b4.chunk.js": "/react-hw-05-movies/static/js/845.beb791b4.chunk.js",
+    "static/js/209.d0acb4f9.chunk.js": "/react-hw-05-movies/static/js/209.d0acb4f9.chunk.js",
+    "static/js/957.5d172efe.chunk.js": "/react-hw-05-movies/static/js/957.5d172efe.chunk.js",
+    "static/js/689.a74b86f8.chunk.js": "/react-hw-05-movies/static/js/689.a74b86f8.chunk.js",
+    "static/js/532.2e072b92.chunk.js": "/react-hw-05-movies/static/js/532.2e072b92.chunk.js",
+    "static/js/194.1ce9f3e9.chunk.js": "/react-hw-05-movies/static/js/194.1ce9f3e9.chunk.js",
+    "index.html": "/react-hw-05-movies/index.html",
+    "main.f4509734.css.map": "/react-hw-05-movies/static/css/main.f4509734.css.map",
+    "main.e6199c58.js.map": "/react-hw-05-movies/static/js/main.e6199c58.js.map",
+    "845.beb791b4.chunk.js.map": "/react-hw-05-movies/static/js/845.beb791b4.chunk.js.map",
+    "209.d0acb4f9.chunk.js.map": "/react-hw-05-movies/static/js/209.d0acb4f9.chunk.js.map",
+    "957.5d172efe.chunk.js.map": "/react-hw-05-movies/static/js/957.5d172efe.chunk.js.map",
+    "689.a74b86f8.chunk.js.map": "/react-hw-05-movies/static/js/689.a74b86f8.chunk.js.map",
+    "532.2e072b92.chunk.js.map": "/react-hw-05-movies/static/js/532.2e072b92.chunk.js.map",
+    "194.1ce9f3e9.chunk.js.map": "/react-hw-05-movies/static/js/194.1ce9f3e9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/css/main.f4509734.css",
+    "static/js/main.e6199c58.js"
   ]
 }
