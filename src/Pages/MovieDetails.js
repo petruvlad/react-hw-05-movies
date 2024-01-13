@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { AUTH_TOKEN } from 'service';
+
+axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`;
 
 const MovieDetails = () => {
-  const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState({});
+  const { listId } = useParams() || {};
+  const [listDetails, setListDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchListDetails = async () => {
       try {
-        if (!movieId) {
-          setError('Movie ID is not provided.');
-          setLoading(false);
-          return;
-        }
+        const apiKey = 'efa2e675f2243f334db256d91fd95d27';
+        const url = `https://api.themoviedb.org/3/list/${listId}?language=en-US&page=1&api_key=${apiKey}`;
+        const response = await axios.get(url);
 
-        // Exemplu pentru endpoint-ul de informații complete despre un film
-        const detailsResponse = await axios.get(
-          `/movies/get-movie-details?id=${movieId}`
-        );
-        setMovieDetails(detailsResponse.data);
-
+        setListDetails(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -31,25 +27,31 @@ const MovieDetails = () => {
       }
     };
 
-    fetchData();
-  }, [movieId]); // Asigură-te că specifici toate dependențele necesare pentru useEffect
+    const fetchData = async () => {
+      if (!listId) {
+        setError('List ID is not provided.');
+        setLoading(false);
+      } else {
+        await fetchListDetails();
+      }
+    };
 
-  // Afisează un mesaj de încărcare dacă datele sunt încă în curs de preluare
+    fetchData();
+  }, [listId]); // Only listId is a dependency now
+
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  // Afisează un mesaj de eroare dacă apare o eroare în timpul preluării datelor
   if (error) {
     return <p>{error}</p>;
   }
 
   return (
     <div>
-      <h2>Movie Details</h2>
-      <p>Title: {movieDetails.title}</p>
-      <p>Overview: {movieDetails.overview}</p>
-      {/* Puteți adăuga mai multe componente sau logica aici */}
+      <h2>List Details</h2>
+      <p>List Name: {listDetails.name}</p>
+      {/* Display other relevant details from listDetails */}
     </div>
   );
 };

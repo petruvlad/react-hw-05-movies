@@ -9,7 +9,6 @@ const Reviews = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Exemplu pentru endpoint-ul de recenzii ale filmului
         const reviewsResponse = await axios.get('/movies/get-movie-reviews');
         setMovieReviews(reviewsResponse.data);
 
@@ -22,14 +21,13 @@ const Reviews = () => {
     };
 
     fetchData();
-  }, []); // Asigură-te că specifici toate dependențele necesare pentru useEffect
+  }, []); 
 
-  // Afisează un mesaj de încărcare dacă datele sunt încă în curs de preluare
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  // Afisează un mesaj de eroare dacă apare o eroare în timpul preluării datelor
+ 
   if (error) {
     return <p>{error}</p>;
   }
@@ -42,7 +40,7 @@ const Reviews = () => {
           <li key={review.id}>{review.comment}</li>
         ))}
       </ul>
-      {/* Puteți adăuga mai multe componente sau logica aici */}
+   
     </div>
   );
 };

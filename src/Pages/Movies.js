@@ -1,50 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { AUTH_TOKEN } from 'service';
+import '../styles.css/Movie.css';
 const Movies = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+  axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`;
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Exemplu pentru endpoint-ul de căutare a filmelor
-        const searchResponse = await axios.get('/search/search-movies');
-        setSearchedMovies(searchResponse.data);
+    if (searchTerm) {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const searchResponse = await axios.get(
+            `/search/movie?include_adult=false&language=en-US&page=1&query=${searchTerm}`
+          );
+          setSearchedMovies(searchResponse.data?.results);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setError('An error occurred while fetching data.');
+        } finally {
+          setLoading(false);
+        }
+      };
 
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('An error occurred while fetching data.');
-        setLoading(false);
-      }
-    };
+      fetchData();
+    }
+  }, [searchTerm]);
 
-    fetchData();
-  }, []); // Asigură-te că specifici toate dependențele necesare pentru useEffect
-
-  // Afisează un mesaj de încărcare dacă datele sunt încă în curs de preluare
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  // Afisează un mesaj de eroare dacă apare o eroare în timpul preluării datelor
   if (error) {
     return <p>{error}</p>;
   }
 
   return (
-    <div>
+    <div className="movies-container">
       <h2>Searched Movies</h2>
-      <ul>
+      <ul className="movies-list">
         {searchedMovies.map(movie => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id} className="movie-item">
+            {movie.title}
+          </li>
         ))}
       </ul>
-      {/* Puteți adăuga mai multe componente sau logica aici */}
+      <label>
+        <span>Search Term</span>
+        <input type="text" onChange={e => setSearchTerm(e.target.value)} />
+      </label>
+      <button
+        disabled={!searchTerm.length}
+        onClick={() => {
+          searchedMovies(searchTerm);
+        }}
+        className="search-button"
+      >
+        {'Search'}
+      </button>
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };
+
 
 export default Movies;

@@ -9,7 +9,7 @@ const Cast = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Exemplu pentru endpoint-ul de informații despre distribuția de actori
+        
         const creditsResponse = await axios.get('/movies/get-movie-credits');
         setMovieCredits(creditsResponse.data);
 
@@ -22,14 +22,12 @@ const Cast = () => {
     };
 
     fetchData();
-  }, []); // Asigură-te că specifici toate dependențele necesare pentru useEffect
-
-  // Afisează un mesaj de încărcare dacă datele sunt încă în curs de preluare
+  }, []);  
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  // Afisează un mesaj de eroare dacă apare o eroare în timpul preluării datelor
+  
   if (error) {
     return <p>{error}</p>;
   }
@@ -42,7 +40,7 @@ const Cast = () => {
           <li key={credit.id}>{credit.actorName}</li>
         ))}
       </ul>
-      {/* Puteți adăuga mai multe componente sau logica aici */}
+  
     </div>
   );
 };
