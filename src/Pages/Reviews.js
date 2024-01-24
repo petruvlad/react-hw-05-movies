@@ -10,7 +10,12 @@ const Reviews = () => {
     const fetchReviews = async () => {
       try {
         const response = await axios.get(
-          `/movie/movie_id/reviews?`
+          `/movie/${movieId}/reviews`, // Corectează calea către recenziile filmului
+          {
+            params: {
+              language: 'en-US', // Poți specifica limba dorită pentru recenzii
+            },
+          }
         );
         setReviews(response.data.results);
       } catch (error) {
@@ -25,7 +30,7 @@ const Reviews = () => {
     <div>
       <h1>Reviews</h1>
       <ul>
-        {reviews.map((review) => (
+        {reviews.map(review => (
           <li key={review.id}>{review.content}</li>
         ))}
       </ul>

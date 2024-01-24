@@ -10,7 +10,7 @@ const Cast = () => {
     const fetchData = async () => {
       try {
         
-        const creditsResponse = await axios.get('/movies/get-movie-credits');
+        const creditsResponse = await axios.get('/movie/movie_id/credits');
         setMovieCredits(creditsResponse.data);
 
         setLoading(false);
