@@ -1,46 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Reviews = () => {
-  const [movieReviews, setMovieReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchReviews = async () => {
       try {
-        const reviewsResponse = await axios.get('/movies/get-movie-reviews');
-        setMovieReviews(reviewsResponse.data);
-
-        setLoading(false);
+        const response = await axios.get(
+          `/movie/movie_id/reviews?`
+        );
+        setReviews(response.data.results);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('An error occurred while fetching data.');
-        setLoading(false);
+        console.error('Error fetching reviews:', error);
       }
     };
 
-    fetchData();
-  }, []); 
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
- 
-  if (error) {
-    return <p>{error}</p>;
-  }
+    fetchReviews();
+  }, [movieId]);
 
   return (
     <div>
-      <h2>Movie Reviews</h2>
+      <h1>Reviews</h1>
       <ul>
-        {movieReviews.map(review => (
-          <li key={review.id}>{review.comment}</li>
+        {reviews.map((review) => (
+          <li key={review.id}>{review.content}</li>
         ))}
       </ul>
-   
     </div>
   );
 };

@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -13,9 +9,14 @@ const MovieDetails = ({ match }) => {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(
-          `/movies/get-movie-details/${match.params.movieId}?language=en-US&page=1`
-        );
+       
+        const response = await axios.get(`/trending/movie/day?language=en-US`, {
+          headers: {
+            Authorization: 'Bearer  efa2e675f2243f334db256d91fd95d27',
+            'Content-Type': 'application/json',
+          },
+        });
+
         setMovieDetails(response.data);
         setLoading(false);
       } catch (error) {
@@ -40,7 +41,7 @@ const MovieDetails = ({ match }) => {
     <div>
       <h2>Movie Details</h2>
       <p>Title: {movieDetails.title}</p>
-      {/* Add other details you want to display */}
+      {/* Adaugă alte detalii pe care vrei să le afișezi */}
     </div>
   );
 };
